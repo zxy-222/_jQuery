@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./jquery-1.9.1.min.js"></script>
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+    }
+    div{
+      margin:100px 100px;
+    }
+    #tab{
+      width: 400px;
+      border: 1px solid #ccc;
+      text-align: center;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    #tab th,#tab td  {
+      border-right:1px solid #ccc;
+      border-bottom:1px solid #ccc;
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <table id="tab">
+      <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>11</td>
+          <td>21</td>
+          <td>31</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>12</td>
+          <td>22</td>
+          <td>32</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>13</td>
+          <td>23</td>
+          <td>33</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+<script>
+  $('#tab>tbody>tr:has(td:has(:checkbox:enabled))').css('background','#e8edf4')
+</script>
+</html>

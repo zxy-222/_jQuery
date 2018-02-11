@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mouseover事件</title>
+  <style>
+    html,body,div{
+      margin:0;
+      padding:0;
+    }
+    ul,li{
+      list-style: none;
+    }
+    .box {
+      margin:0 auto;
+      padding-left:100px;
+    }
+    .box h1 {
+      margin:10px 400px;
+    }
+    .fu_ul li{
+      float:left;
+      width: 200px;
+      height: 200px;
+      position: relative;
+      border: 1px solid #e8edf1;
+    }
+    .fu_ul li img{
+      width: 200px;
+      height:200px;
+    }
+    .fu_ul li div {
+      width: 200px;
+      height: 200px;
+      box-sizing:border-box;
+      padding: 70px 0 0 15px;
+      color:#333;
+      font-size: 40px;
+      background:rgba(255,255,255,0.8);
+      display:none;
+      position: absolute;
+      top: 0;
+      left:0
+    }
+    .fu_ul .four img,
+    .fu_ul .five img{
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      left: 50%;
+      top:50%;
+      transform: translate(-50%,-50%)
+    }
+  
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>五福临门</h1>   
+    <ul class="fu_ul">
+      <li>
+        <img src="./imgs/FU1.jpg" alt="">
+        <div>五福临门</div>
+      </li>
+      <li>
+        <img src="./imgs/FU2.jpg" alt="">
+        <div>五福临门</div>
+      </li>
+      <li>
+        <img src="./imgs/FU3.jpg" alt="">
+        <div>五福临门</div>
+      </li>
+      <li class="four">
+        <img src="./imgs/FU4.jpg" alt="">
+        <div>五福临门</div>
+      </li>
+      <li class="five">
+        <img src="./imgs/FU5.jpg" alt="">
+        <div>五福临门</div>
+      </li>
+    </ul> 
+  </div>
+</body>
+<script src="./jquery-1.9.1.min.js"></script>
+<script>
+  $('.fu_ul>li').mouseover(function(){
+      // $(this).find('div').css({'display':'block','zIndex':'999'});
+      $(this).find('div').show().css('zIndex','999')
+  })
+  $('.fu_ul>li').mouseout(function(){
+      $(this).find('div').css({'display':'none','zIndex':'-1'});
+  })
+</script>
+</html>

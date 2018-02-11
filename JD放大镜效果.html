@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JD放大镜效果</title>
+  <style>
+    *{
+      margin:0;
+      padding:0
+    }
+    .box {
+      width: 350px;
+      height: 350px;
+      border: 1px solid #ccc;
+      margin:100px;
+      position: relative;
+    }
+    .big {
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      top: 0;
+      left: 360px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+      display: block;
+    }
+    .mask {
+      width: 175px;
+      height: 175px;
+      background-color: rgba(255,255,0,0.4);
+      position: absolute;
+      top: 0;
+      left:0;
+      cursor: move;
+      display: none;
+    }
+
+    .small {position: relative}
+    .box img {vertical-align: top;}
+    #bigBox img {position: absolute;}
+    #bigBox p {
+      width:100%;
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      font-size: 45px;
+      color:rgba(255,255,255,0.4);
+      text-shadow: 4px 4px 10px rgb(235, 176, 186);
+      letter-spacing: 6px;
+      vertical-align: middle;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="box">
+    <div class="small" id="smallBox">
+        <img src="./imgs/01.jpg" alt="" width="350">
+        <div class="mask" id="mask"></div>
+    </div>
+    <div class="big" id="bigBox">
+      <img src="./imgs/01.jpg" alt="" width="800" id="bigImg">
+      <p>华为nova2S</p>
+    </div>
+  </div>
+</body>
+<script>
+  var box = document.getElementById('box');
+  var smallBox = document.getElementById('smallBox');
+  var bigBox = document.getElementById('bigBox');
+  var bigImg = document.getElementById('bigImg');
+  var mask = document.getElementById('mask');
+  //鼠标经过小盒子显示遮罩和大盒子,鼠标离开后隐藏
+  smallBox.onmouseover=function(){
+    mask.style.display = 'block';
+    bigBox.style.display = 'block';
+  }
+  smallBox.onmouseout=function(){
+    mask.style.display = 'block';
+    bigBox.style.display = 'block';
+  }
+  //遮罩跟随鼠标坐标
+  //鼠标在smallBox上移动时，获取鼠标坐标，并设置mask坐标
+  smallBox.onmousemove = function(event){
+      var event = event || window.event;
+      //获取鼠标在页面中的坐标
+      var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+      var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+      //获取鼠标在盒子中的坐标
+      var boxX = pageX - box.offsetLeft;
+      var boxY = pageY - box.offsetTop;
+      //设置mask的坐标
+      var maskX = boxX - mask.offsetWidth / 2;
+      var maskY = boxY - mask.offsetHeight / 2;
+      //限制遮罩的运动范围
+      if (maskX < 0) {
+            maskX = 0;
+        }
+        if (maskX > smallBox.offsetWidth - mask.offsetWidth) {
+            maskX = smallBox.offsetWidth - mask.offsetWidth;
+        }
+        if (maskY < 0) {
+            maskY = 0;
+        }
+        if (maskY > smallBox.offsetHeight - mask.offsetHeight) {
+            maskY = smallBox.offsetHeight - mask.offsetHeight;
+        }
+          //设置mask的位置
+        mask.style.left = maskX + "px";
+        mask.style.top = maskY + "px";
+         //4.按照比例移动大图
+
+        //大图能够移动的总距离 = 大图的宽度-大盒子的宽度
+        var bigToMove = bigImg.offsetWidth - bigBox.offsetWidth;
+        //mask能够移动的总距离 = 小盒子的宽度-mask的宽度
+        var maskToMove = smallBox.offsetWidth - mask.offsetWidth;
+        //rate = 大图能够移动的总距离/mask能够移动的总距离
+        var rate = bigToMove / maskToMove;
+        //大图应该到的位置  = rate * mask当前的位置 (移动方向相反所以是负数)
+        bigImg.style.left = -rate * maskX + "px";
+        bigImg.style.top = -rate * maskY + "px";
+  }
+</script>
+</html>

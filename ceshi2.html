@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #tab {
+      margin: 50px 50px;
+      width: 400px;
+      border-top: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    #tab th,#tab td {
+      height:20px;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div>
+      <table id="tab">
+        <thead>
+          <tr>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</body>
+<script src="./jquery-1.9.1.min.js"></script>
+<script>
+  $("#tab tbody").on('click','tr',function(){
+    $(this).css("background","#e8eed4").siblings().css("background","");
+    alert($(this).index())
+  })
+</script>
+<!-- <script>
+  var $li_1 = $("<li>1</li>");
+  var $li_2 = $("<li>2</li>");
+  var $ul = $("<ul></ul>");
+  $('body').append($ul);
+  $('ul').css({"border":"1px solid #ccc","list-style":"none","background":"#e8eed4"}).append($li_1).append($li_2);
+  $('li').css({"margin-top":"10px"})
+</script> -->
+</html>
